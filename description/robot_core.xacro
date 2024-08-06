@@ -15,11 +15,26 @@
             <color rgba="0 0 0.8 1"/>
         </material>
 
+        <material name="red">
+            <color rgba="1 0 0 1"/>
+        </material>
+
 
     <!-- base link -->
     <link name="base_link">
 
     </link>
+
+    <!-- left wheel link -->
+    <joint name="base_footprint_joint" type="fixed">
+        <parent link="base_link"/>  
+        <child link="base_footprint"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
+    </joint>
+
+    <link name="base_footprint">
+    </link>
+
 
     <!-- chassis link -->
 
@@ -50,6 +65,10 @@
         </xacro:inertial_box>
     </link>
 
+    <gazebo reference="chassis_link">
+        <material>Gazebo/White</material>
+    </gazebo>
+
     <!-- left wheel link -->
     <joint name="left_wheel_joint" type="continuous">
         <parent link="base_link"/>
@@ -67,13 +86,17 @@
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.05" length="0.04"/>
+                <sphere radius="0.05"/>
             </geometry>
         </collision>
         <xacro:inertial_cylinder mass="0.1" length="0.04" radius="0.05">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
+
+    <gazebo reference="left_wheel_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
 
     <!-- right wheel link -->
     <joint name="right_wheel_joint" type="continuous">
@@ -92,13 +115,17 @@
         </visual>
         <collision>
             <geometry>
-                <cylinder radius="0.05" length="0.04"/>
+                <sphere radius="0.05"/>
             </geometry>
         </collision>
         <xacro:inertial_cylinder mass="0.1" length="0.04" radius="0.05">
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_cylinder>
     </link>
+
+    <gazebo reference="right_wheel_link">
+        <material>Gazebo/Blue</material>
+    </gazebo>
 
 
     <!-- caster wheel link -->
@@ -125,6 +152,12 @@
             <origin xyz="0 0 0" rpy="0 0 0"/>
         </xacro:inertial_sphere>
     </link>
+
+    <gazebo reference="caster_wheel_link">
+        <material>Gazebo/Black</material>
+        <mu1 value="0.001"/>
+        <mu2 value="0.001"/>        
+    </gazebo>
 
 
 </robot>
